@@ -1,24 +1,47 @@
 package entity;
 
 public class Book {
-    private int id;
+    private String id;
     private String title;
-    private String author;
     private boolean isIssued;
+    private String issuedToUserId;
 
-    public Book(int id, String title, String author) {
+    public Book(String id, String title) {
         this.id = id;
         this.title = title;
-        this.author = author;
         this.isIssued = false;
+        this.issuedToUserId = null;
     }
 
-    public int getId() { return id; }
-    public String getTitle() { return title; }
-    public String getAuthor() { return author; }
-    public boolean isIssued() { return isIssued; }
+    public String getId() {
+        return id;
+    }
 
-    public void setIssued(boolean issued) {
-        isIssued = issued;
+    public String getTitle() {
+        return title;
+    }
+
+    public boolean isIssued() {
+        return isIssued;
+    }
+
+    public String getIssuedToUserId() {
+        return issuedToUserId;
+    }
+
+    public void issueTo(String userId) {
+        this.isIssued = true;
+        this.issuedToUserId = userId;
+    }
+
+    public void returnBook() {
+        this.isIssued = false;
+        this.issuedToUserId = null;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{id='" + id + "', title='" + title + "', issued=" + isIssued +
+                (isIssued ? ", issuedTo='" + issuedToUserId + "'}" : "'}");
     }
 }

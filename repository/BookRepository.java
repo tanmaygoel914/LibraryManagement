@@ -4,21 +4,25 @@ import entity.Book;
 import java.util.*;
 
 public class BookRepository {
-    private final Map<Integer, Book> books = new HashMap<>();
+    private Map<String, Book> books = new HashMap<>();
 
-    public void addBook(Book book) {
-        books.put(book.getId(), book);
+    public BookRepository() {
+        addBook(new Book("1", "Java"));
+        addBook(new Book("2", "CPP"));
+        addBook(new Book("3", "Flutter"));
     }
 
-    public Book getBook(int id) {
+    public boolean addBook(Book book) {
+        if (books.containsKey(book.getId())) return false;
+        books.put(book.getId(), book);
+        return true;
+    }
+
+    public Book getBookById(String id) {
         return books.get(id);
     }
 
     public Collection<Book> getAllBooks() {
         return books.values();
-    }
-
-    public void removeBook(int id) {
-        books.remove(id);
     }
 }

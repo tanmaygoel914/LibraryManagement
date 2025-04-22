@@ -1,72 +1,36 @@
 package ui;
 
 import controller.LibraryController;
+import repository.*;
+import service.*;
 
 import java.util.Scanner;
 
 public class MainUI {
-    private final LibraryController controller;
-
-    public MainUI(LibraryController controller) {
-        this.controller = controller;
-    }
-
     public void start() {
-        Scanner scanner = new Scanner(System.in);
-        int choice;
+        BookRepository bookRepo = new BookRepository();
+        UserRepository userRepo = new UserRepository();
+        LibraryService libraryService = new LibraryService(bookRepo, userRepo);
+        UserService userService = new UserService(bookRepo);
+        LibraryController controller = new LibraryController(libraryService, userService);
 
-        do {
-            System.out.println("\n--- Library Menu ---");
-            System.out.println("1. Add Book");
-            System.out.println("2. Add User");
-            System.out.println("3. Issue Book");
-            System.out.println("4. Return Book");
-            System.out.println("5. Show Books");
-            System.out.println("0. Exit");
-            System.out.print("Choose an option: ");
-            choice = scanner.nextInt();
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("\nSelect Role:");
+            System.out.println("1. Librarian\n2. User\n3. Exit");
+            int role = sc.nextInt();
+            sc.nextLine();
 
-            switch (choice) {
-                case 1 -> {
-                    System.out.print("Book ID: ");
-                    int id = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.print("Title: ");
-                    String title = scanner.nextLine();
-                    System.out.print("Author: ");
-                    String author = scanner.nextLine();
-                    controller.addBook(id, title, author);
-                }
-                case 2 -> {
-                    System.out.print("User ID: ");
-                    int id = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.print("Name: ");
-                    String name = scanner.nextLine();
-                    controller.addUser(id, name);
-                }
-                case 3 -> {
-                    System.out.print("Book ID: ");
-                    int bookId = scanner.nextInt();
-                    System.out.print("User ID: ");
-                    int userId = scanner.nextInt();
-                    if (controller.issueBook(bookId, userId))
-                        System.out.println("Book issued successfully.");
-                    else
-                        System.out.println("Issue failed.");
-                }
-                case 4 -> {
-                    System.out.print("Book ID: ");
-                    int bookId = scanner.nextInt();
-                    if (controller.returnBook(bookId))
-                        System.out.println("Book returned.");
-                    else
-                        System.out.println("Return failed.");
-                }
-                case 5 -> controller.showBooks();
-                case 0 -> System.out.println("Exiting...");
-                default -> System.out.println("Invalid option.");
+            if (role == 1) {
+                controller.librarianMenu();
+            } else if (role == 2) {
+                System.out.print("Enter your User ID: ");
+                String userId = sc.nextLine();
+                controller.userMenu(userId);
+            } else {
+                break;
             }
-        } while (choice != 0);
+        }
     }
 }
+

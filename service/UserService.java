@@ -1,20 +1,31 @@
+
+// Service: UserService.java
 package service;
 
-import entity.User;
-import repository.UserRepository;
+import entity.Book;
+import repository.BookRepository;
+
+import java.util.*;
 
 public class UserService {
-    private final UserRepository userRepo;
+    private BookRepository bookRepo;
 
-    public UserService(UserRepository userRepo) {
-        this.userRepo = userRepo;
+    public UserService(BookRepository bookRepo) {
+        this.bookRepo = bookRepo;
     }
 
-    public void addUser(User user) {
-        userRepo.addUser(user);
+    public List<Book> getIssuedBooks(String userId) {
+        List<Book> result = new ArrayList<>();
+        for (Book book : bookRepo.getAllBooks()) {
+            if (userId.equals(book.getIssuedToUserId())) {
+                result.add(book);
+            }
+        }
+        return result;
     }
 
-    public User getUser(int id) {
-        return userRepo.getUser(id);
+    public Collection<Book> viewAllBooks() {
+        return bookRepo.getAllBooks();
     }
 }
+

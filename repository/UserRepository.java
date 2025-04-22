@@ -4,17 +4,25 @@ import entity.User;
 import java.util.*;
 
 public class UserRepository {
-    private final Map<Integer, User> users = new HashMap<>();
+    private Map<String, User> users = new HashMap<>();
 
-    public void addUser(User user) {
-        users.put(user.getId(), user);
+    public UserRepository() {
+        addUser(new User("1", "Ayush"));
+        addUser(new User("2", "Keshav"));
+        addUser(new User("3", "Rachit"));
     }
 
-    public User getUser(int id) {
+    public boolean addUser(User user) {
+        if (users.containsKey(user.getId())) return false;
+        users.put(user.getId(), user);
+        return true;
+    }
+
+    public User getUserById(String id) {
         return users.get(id);
     }
 
-    public Collection<User> getAllUsers() {
-        return users.values();
+    public boolean userExists(String id) {
+        return users.containsKey(id);
     }
 }

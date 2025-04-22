@@ -3,44 +3,55 @@ package service;
 import entity.Book;
 import entity.User;
 import repository.BookRepository;
+import repository.UserRepository;
+
+import java.util.*;
 
 public class LibraryService {
-    private final BookRepository bookRepo;
-    private final UserService userService;
+    private BookRepository bookRepo;
+    private UserRepository userRepo;
 
-    public LibraryService(BookRepository bookRepo, UserService userService) {
+    public LibraryService(BookRepository bookRepo, UserRepository userRepo) {
         this.bookRepo = bookRepo;
-        this.userService = userService;
+        this.userRepo = userRepo;
     }
 
-    public void addBook(Book book) {
-        bookRepo.addBook(book);
-    }
-
-    public boolean issueBook(int bookId, int userId) {
-        Book book = bookRepo.getBook(bookId);
-        User user = userService.getUser(userId);
-
-        if (book != null && user != null && !book.isIssued()) {
-            book.setIssued(true);
-            return true;
+    public String addBook(Book book) {
+        if (!bookRepo.addBook(book)) {
+            return "Book ID already exists.";
         }
-        return false;
+        return "Book added successfully.";
     }
 
-    public boolean returnBook(int bookId) {
-        Book book = bookRepo.getBook(bookId);
-        if (book != null && book.isIssued()) {
-            book.setIssued(false);
-            return true;
+    public String addUser(User user) {
+        if (!userRepo.addUser(user)) {
+            return "User ID already exists.";
         }
-        return false;
+        return "User added successfully.";
     }
 
-    public void displayBooks() {
-        for (Book book : bookRepo.getAllBooks()) {
-            System.out.println(book.getId() + ": " + book.getTitle() + " by " + book.getAuthor() +
-                    (book.isIssued() ? " [Issued]" : ""));
-        }
+    public String issueBook(String bookId, String userId) {
+        Book book = bookRepo.getBookById(bookId);
+        if (book == null) return "Book not found.";
+
+        if (!userRepo.userExists(userId)) return "User not found.";
+
+        if (book.isIssued()) return "Book already issued.";
+
+        book.issueTo(userId);
+        return "Book issued to user " + userId;
+    }
+
+    public String returnBook(String bookId) {
+        Book book = bookRepo.getBookById(bookId);
+        if (book == null) return "Book not found.";
+        if (!book.isIssued()) return "Book was not issued.";
+
+        book.returnBook();
+        return "Book returned successfully.";
+    }
+
+    public Collection<Book> viewAllBooks() {
+        return bookRepo.getAllBooks();
     }
 }
