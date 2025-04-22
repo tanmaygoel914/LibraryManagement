@@ -1,7 +1,7 @@
 package controller;
 
-import model.Book;
-import model.User;
+import entity.Book;
+import entity.User;
 import service.LibraryService;
 import service.UserService;
 

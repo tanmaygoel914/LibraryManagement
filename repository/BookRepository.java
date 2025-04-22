@@ -1,6 +1,6 @@
 package repository;
 
-import model.Book;
+import entity.Book;
 import java.util.*;
 
 public class BookRepository {

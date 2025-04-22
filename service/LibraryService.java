@@ -1,7 +1,7 @@
 package service;
 
-import model.Book;
-import model.User;
+import entity.Book;
+import entity.User;
 import repository.BookRepository;
 
 public class LibraryService {

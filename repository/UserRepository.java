@@ -1,6 +1,6 @@
 package repository;
 
-import model.User;
+import entity.User;
 import java.util.*;
 
 public class UserRepository {
