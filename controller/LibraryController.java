@@ -76,15 +76,29 @@ public class LibraryController {
 
             switch (choice) {
                 case 1:
-                    userService.getIssuedBooks(userId).forEach(System.out::println);
+                    printList(userService.getIssuedBooks(userId));
                     break;
                 case 2:
-                    userService.viewAllBooks().forEach(System.out::println);
+                    printList( userService.viewAllBooks());
                     break;
                 default:
                     return;
             }
         }
     }
+
+    public static void printList(Collection<Book> items) {
+        for (Book item : items) {
+            System.out.println(item);
+        }
+    }
+
+    public static void printList(List<Book> items) {
+        for (Book item : items) {
+            System.out.println(item);
+        }
+    }
+
+
 }
 
