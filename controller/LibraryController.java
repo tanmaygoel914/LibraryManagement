@@ -57,7 +57,7 @@ public class LibraryController {
                     System.out.println(libraryService.returnBook(returnBookId));
                     break;
                 case 5:
-                    libraryService.viewAllBooks().forEach(System.out::println);
+                    printList( userService.viewAllBooks());
                     break;
                 default:
                     return;
