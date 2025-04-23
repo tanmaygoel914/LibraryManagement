@@ -26,7 +26,10 @@ public class MainUI {
             } else if (role == 2) {
                 System.out.print("Enter your User ID: ");
                 String userId = sc.nextLine();
-                controller.userMenu(userId);
+                if(!libraryService.isUserExist(userId)){
+                    System.out.println("User doesn't Exist");
+                }
+                else controller.userMenu(userId);
             } else {
                 break;
             }

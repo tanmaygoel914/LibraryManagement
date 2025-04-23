@@ -5,7 +5,9 @@ package service;
 import entity.Book;
 import repository.BookRepository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class UserService {
     private BookRepository bookRepo;
@@ -27,5 +29,6 @@ public class UserService {
     public Collection<Book> viewAllBooks() {
         return bookRepo.getAllBooks();
     }
+
 }
 

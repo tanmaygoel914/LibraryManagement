@@ -22,6 +22,17 @@ public class LibraryService {
         }
         return "Book added successfully.";
     }
+    public String removeBook(String id) {
+        if(!bookRepo.bookExists(id)) return "Book doesn't exists.";
+       bookRepo.removeBook(bookRepo.getBookById(id));
+        return "Book removed successfully.";
+    }
+    public String removeUser(String id) {
+        if(!userRepo.userExists(id)) return "User doesn't exists.";
+        userRepo.removeUser(userRepo.getUserById(id));
+        return "User removed successfully.";
+    }
+
 
     public String addUser(User user) {
         if (!userRepo.addUser(user)) {
@@ -53,5 +64,12 @@ public class LibraryService {
 
     public Collection<Book> viewAllBooks() {
         return bookRepo.getAllBooks();
+    }
+    public Collection<User> viewAllUsers() {
+        return userRepo.getAllBooks();
+    }
+    public boolean isUserExist(String id){
+        User user = userRepo.getUserById(id);
+        return user != null;
     }
 }

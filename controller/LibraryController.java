@@ -25,7 +25,10 @@ public class LibraryController {
             System.out.println("3. Issue Book");
             System.out.println("4. Return Book");
             System.out.println("5. Show All Books");
-            System.out.println("6. Exit");
+            System.out.println("6. Show All Users");
+            System.out.println("7. Remove Book");
+            System.out.println("8. Remove User");
+            System.out.println("9. Exit");
             int choice = sc.nextInt();
             sc.nextLine();
 
@@ -58,6 +61,20 @@ public class LibraryController {
                     break;
                 case 5:
                     printList( userService.viewAllBooks());
+                    break;
+                case 6:
+                    printListUser( libraryService.viewAllUsers());
+                    break;
+                case 7:
+                    System.out.print("Enter Book ID: ");
+                    String deletedBookId = sc.nextLine();
+
+                    System.out.println(libraryService.removeBook(deletedBookId));
+                    break;
+                case 8:
+                    System.out.print("Enter User ID: ");
+                    String deletedUserId = sc.nextLine();
+                    System.out.println(libraryService.removeUser(deletedUserId));
                     break;
                 default:
                     return;
@@ -93,8 +110,18 @@ public class LibraryController {
         }
     }
 
-    public static void printList(List<Book> items) {
+    public static void printListBook(List<Book> items) {
         for (Book item : items) {
+            System.out.println(item);
+        }
+    }
+    public static void printListUser(List<User> items) {
+        for (User item : items) {
+            System.out.println(item);
+        }
+    }
+    public static void printListUser(Collection<User> items) {
+        for (User item : items) {
             System.out.println(item);
         }
     }
