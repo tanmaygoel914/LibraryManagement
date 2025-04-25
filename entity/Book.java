@@ -14,6 +14,30 @@ public class Book {
         this.issuedToUserId = null;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setIssued(boolean issued) {
+        isIssued = issued;
+    }
+
+    public void setIssuedToUserId(String issuedToUserId) {
+        this.issuedToUserId = issuedToUserId;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     public String getId() {
         return id;
     }
