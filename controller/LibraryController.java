@@ -28,7 +28,7 @@ public class LibraryController {
             System.out.println("6. Show All Users");
             System.out.println("7. Remove Book");
             System.out.println("8. Remove User");
-            System.out.println("9. Exit");
+            System.out.println("9. Specific User Issued  Book Details");
             int choice = sc.nextInt();
             sc.nextLine();
 
@@ -76,6 +76,10 @@ public class LibraryController {
                     String deletedUserId = sc.nextLine();
                     System.out.println(libraryService.removeUser(deletedUserId));
                     break;
+                case 9:
+                    System.out.print("Enter User ID: ");
+                    String getUserId = sc.nextLine();
+                    printList(userService.getIssuedBooks(getUserId));
                 default:
                     return;
             }
@@ -88,7 +92,8 @@ public class LibraryController {
             System.out.println("\n--- User Menu ---");
             System.out.println("1. View My Issued Books");
             System.out.println("2. View All Books");
-            System.out.println("3. Exit");
+            System.out.println("3. Edit User Details");
+            System.out.println("4. Exit");
             int choice = sc.nextInt();
 
             switch (choice) {
@@ -98,6 +103,12 @@ public class LibraryController {
                 case 2:
                     printList( userService.viewAllBooks());
                     break;
+                    case 3:
+                        System.out.println("Enter User Name: ");
+                        sc.nextLine();
+                        String name = sc.nextLine();
+                        System.out.println( libraryService.editUser(userId,name));
+                        break;
                 default:
                     return;
             }
@@ -110,16 +121,6 @@ public class LibraryController {
         }
     }
 
-    public static void printListBook(List<Book> items) {
-        for (Book item : items) {
-            System.out.println(item);
-        }
-    }
-    public static void printListUser(List<User> items) {
-        for (User item : items) {
-            System.out.println(item);
-        }
-    }
     public static void printListUser(Collection<User> items) {
         for (User item : items) {
             System.out.println(item);

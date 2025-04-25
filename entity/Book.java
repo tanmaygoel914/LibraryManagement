@@ -5,6 +5,7 @@ public class Book {
     private String title;
     private boolean isIssued;
     private String issuedToUserId;
+    private int price;
 
     public Book(String id, String title) {
         this.id = id;

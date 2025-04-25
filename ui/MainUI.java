@@ -1,8 +1,10 @@
 package ui;
 
 import controller.LibraryController;
-import repository.*;
-import service.*;
+import repository.BookRepository;
+import repository.UserRepository;
+import service.LibraryService;
+import service.UserService;
 
 import java.util.Scanner;
 

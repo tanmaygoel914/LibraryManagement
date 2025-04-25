@@ -16,6 +16,9 @@ public class LibraryService {
         this.userRepo = userRepo;
     }
 
+
+
+
     public String addBook(Book book) {
         if (!bookRepo.addBook(book)) {
             return "Book ID already exists.";
@@ -39,6 +42,15 @@ public class LibraryService {
             return "User ID already exists.";
         }
         return "User added successfully.";
+    }
+
+    public String editUser(String userId,String name) {
+        User user = userRepo.getUserById(userId);
+        if (user == null) return "User not found.";
+        if (userRepo.editUser(user,name)) {
+            return "User update successfully.";
+        }
+        return "User update failed.";
     }
 
     public String issueBook(String bookId, String userId) {

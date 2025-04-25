@@ -31,10 +31,17 @@ public class UserRepository {
         users.remove(user.getId(), user);
         return true;
     }
+    public boolean editUser(User user,String name)  {
+        if (!users.containsKey(user.getId())) return false;
+        user.setName(name);
+        users.put(user.getId(), user);
+        return true;
+    }
     public boolean userExists(String id) {
         return users.containsKey(id);
     }
     public Collection<User> getAllBooks() {
         return users.values();
     }
+
 }
