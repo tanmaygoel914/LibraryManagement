@@ -7,14 +7,14 @@ public class BookRepository {
     private Map<String, Book> books = new HashMap<>();
 
     public BookRepository() {
-        addBook(new Book("1", "Java"));
-        addBook(new Book("2", "CPP"));
-        addBook(new Book("3", "Flutter"));
-        addBook(new Book("4", "HTML"));
-        addBook(new Book("5", "CSS"));
-        addBook(new Book("6", "JavaScript"));
-        addBook(new Book("7", "Ruby"));
-        addBook(new Book("8", "Perl"));
+        addBook(new Book("1", "Java",100));
+        addBook(new Book("2", "CPP",99));
+        addBook(new Book("3", "Flutter",101));
+        addBook(new Book("4", "HTML",105));
+        addBook(new Book("5", "CSS",80));
+        addBook(new Book("6", "JavaScript",10));
+        addBook(new Book("7", "Ruby",5));
+        addBook(new Book("8", "Perl",3));
     }
 
     public boolean addBook(Book book) {

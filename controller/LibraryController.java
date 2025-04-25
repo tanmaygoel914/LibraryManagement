@@ -38,7 +38,9 @@ public class LibraryController {
                     String bookId = sc.nextLine();
                     System.out.print("Enter Book Title: ");
                     String title = sc.nextLine();
-                    System.out.println(libraryService.addBook(new Book(bookId, title)));
+                    System.out.print("Enter Book Price: ");
+                    int price = sc.nextInt();
+                    System.out.println(libraryService.addBook(new Book(bookId, title,price)));
                     break;
                 case 2:
                     System.out.print("Enter User ID: ");
@@ -60,10 +62,10 @@ public class LibraryController {
                     System.out.println(libraryService.returnBook(returnBookId));
                     break;
                 case 5:
-                    printList( userService.viewAllBooks());
+                    printList(userService.viewAllBooks());
                     break;
                 case 6:
-                    printListUser( libraryService.viewAllUsers());
+                    printListUser(libraryService.viewAllUsers());
                     break;
                 case 7:
                     System.out.print("Enter Book ID: ");
@@ -93,7 +95,8 @@ public class LibraryController {
             System.out.println("1. View My Issued Books");
             System.out.println("2. View All Books");
             System.out.println("3. Edit User Details");
-            System.out.println("4. Exit");
+            System.out.println("4. Get Sorted Book");
+            System.out.println("5. Exit");
             int choice = sc.nextInt();
 
             switch (choice) {
@@ -101,14 +104,42 @@ public class LibraryController {
                     printList(userService.getIssuedBooks(userId));
                     break;
                 case 2:
-                    printList( userService.viewAllBooks());
+                    printList(userService.viewAllBooks());
                     break;
-                    case 3:
-                        System.out.println("Enter User Name: ");
-                        sc.nextLine();
-                        String name = sc.nextLine();
-                        System.out.println( libraryService.editUser(userId,name));
-                        break;
+                case 3:
+                    System.out.println("Enter User Name: ");
+                    sc.nextLine();
+                    String name = sc.nextLine();
+                    System.out.println(libraryService.editUser(userId, name));
+                    break;
+                case 4:
+                    comparatorMenu();
+                    break;
+                default:
+                    return;
+            }
+        }
+    }
+
+    public void comparatorMenu() {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("\n--- Comparator Menu ---");
+            System.out.println("1. Based on Price");
+            System.out.println("2. Based on ID");
+            System.out.println("3. Based on Title");
+            System.out.println("4. Exit");
+            int choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    printList(libraryService.compareBooks("Price"));
+                    break;
+                case 2:
+                    printList(libraryService.compareBooks("ID"));
+                    break;
+                case 3:
+                    printList(libraryService.compareBooks("Title"));
+                    break;
                 default:
                     return;
             }

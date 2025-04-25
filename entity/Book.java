@@ -7,9 +7,10 @@ public class Book {
     private String issuedToUserId;
     private int price;
 
-    public Book(String id, String title) {
+    public Book(String id, String title,int price) {
         this.id = id;
         this.title = title;
+        this.price=price;
         this.isIssued = false;
         this.issuedToUserId = null;
     }
@@ -66,7 +67,12 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{id='" + id + "', title='" + title + "', issued=" + isIssued +
-                (isIssued ? ", issuedTo='" + issuedToUserId + "'}" : "'}");
+        return "Book{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", isIssued=" + isIssued +
+                ", issuedToUserId='" + issuedToUserId + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

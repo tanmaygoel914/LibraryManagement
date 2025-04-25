@@ -1,11 +1,16 @@
 package service;
 
+import comparator.IDComparator;
+import comparator.PriceComparator;
+import comparator.TitleComparator;
 import entity.Book;
 import entity.User;
 import repository.BookRepository;
 import repository.UserRepository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class LibraryService {
     private BookRepository bookRepo;
@@ -83,5 +88,23 @@ public class LibraryService {
     public boolean isUserExist(String id){
         User user = userRepo.getUserById(id);
         return user != null;
+    }
+    public Collection<Book> compareBooks(String type){
+        List<Book> newBooks=new ArrayList<>(bookRepo.getAllBooks());
+        return switch (type) {
+            case "Price" -> {
+                newBooks.sort(new PriceComparator());
+                yield newBooks;
+            }
+            case "ID" -> {
+                newBooks.sort(new IDComparator());
+                yield newBooks;
+            }
+            case "Title" -> {
+                newBooks.sort(new TitleComparator());
+                yield newBooks;
+            }
+            default -> new ArrayList<>();
+        };
     }
 }
